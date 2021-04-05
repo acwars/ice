@@ -1,0 +1,131 @@
+% 10,11 and 12pt fonts allowed
+\documentclass[12pt]{novax} 
+
+% extend the number of registers
+\usepackage{etex} 
+
+\usepackage[margin={1.2in}]{geometry}
+% \usepackage[top=1in,left=1in,vmarginratio=2:3,hmarginratio=2:5,twoside]{geometry}
+
+% Appendix package. Not necessary, but it does make managing appendices easier
+\usepackage[titletoc]{appendix}
+
+% sideways tables and figures
+\usepackage{rotating}
+
+% tables that spill over multiple pages
+\usepackage{longtable}
+
+% references
+\usepackage[square,sort,comma,numbers]{natbib}
+
+% fonts that are nicer than defaults
+\usepackage[sc]{mathpazo}
+\usepackage{courier}
+
+% Use 8-bit encoding that has 256 glyphs, pretty please
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+
+% babel is required for blindtext, which generates random text
+\usepackage[english]{babel}
+\usepackage{blindtext}
+
+% math support
+\usepackage{amsmath}
+
+% Slightly tweak font spacing for aesthetics
+\usepackage{microtype}
+
+\usepackage[stable,multiple]{footmisc}
+
+% Nicer captions
+\RequirePackage[font=small,format=plain,labelfont=bf,textfont=it]{caption}
+\addtolength{\abovecaptionskip}{1ex}
+\addtolength{\belowcaptionskip}{1ex}
+
+\title{A minimal and modern LaTeX template}
+\author{ACWars}
+%\degreename{}
+%\degreefield{}
+%\department{}
+\degreemonth{April}
+\degreeyear{2021}
+%\principaladvisor{}
+
+% Optionally, you can add a second advisor, but you can't have three
+%\secondadvisor{}
+
+\begin{document}
+
+\pagenumbering{roman}
+
+% the following four pages are required in that order. The first two pages are
+% not allowed to have page numbers, this is taken care of in the class file.
+\thesistitlepage
+
+\copyrightpage
+
+\begin{abstract}
+  An abstract should be less than 350 words. Here's some filler text. \blindtext
+\end{abstract}
+
+% Center headings for table of contents, LOT, and LOF and make them smaller so
+% that "Abstract", "Acknowledgments" and "Contents" all look alike. Comment out
+% if you want the default. If you want more control, use the "tocloft" package.
+\renewcommand{\contentsname}{\protect\centering\protect\Large Contents}
+\renewcommand{\listtablename}{\protect\centering\protect\Large List of Tables}
+\renewcommand{\listfigurename}{\protect\centering\protect\Large List of Figures}
+
+\tableofcontents % Table of contents
+
+% The rest of the front matter: Lists of tables, figures, dedication and
+% acknowledment is optional. Comment out whatever you don't like
+\listoftables
+\listoffigures
+\begin{acknowledgments}
+  \blindtext
+\end{acknowledgments}
+\begin{dedication}
+  To my parents
+\end{dedication}
+
+\pagenumbering{arabic} % reset page numbering and switch to arabic
+
+\addcontentsline{toc}{chapter}{Introduction}
+\chapter*{Introduction}\label{ch:intro}
+\input{chapters/introduction}
+
+\chapter{Main Writing Method}\label{ch:1}
+\input{chapters/chapter1}
+
+\chapter{Formula Illustration Form}\label{ch:2}
+\input{chapters/chapter2}
+
+\chapter{Citations and Links}\label{ch:3}
+\input{chapters/chapter3}
+
+\chapter{Other Formats}\label{ch:4}
+\input{chapters/chapter4}
+
+% Put appendices, bibliography, and supplemental materials here
+
+% The bibliography may be single spaced within each entry, but must be
+% double-spaced between each entry. Most bibliography styles leave space between
+% entries, so that shouldn't be a problem.
+\begin{singlespacing}
+  % I like "References" better than "Bibliography"
+  \renewcommand{\bibname}{References}
+
+  % Any bibliohgraphy style that leaves space between entries is fine
+  \nocite{*}
+  \bibliographystyle{acm}
+  \bibliography{references/references}
+\end{singlespacing}
+
+% Appendices from all chapters should go at the end
+\input{chapters/appendix}
+
+\end{document}
